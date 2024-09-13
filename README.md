@@ -20,7 +20,8 @@
 
 To get started with **MernMaker**, 
   Download the files, and run (in the folder with setup.py)
-  
+
+      pip install click
       pip install --user . 
 
   Add to PATH if not done.
