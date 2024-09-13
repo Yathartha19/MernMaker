@@ -28,4 +28,8 @@ To get started with **MernMaker**,
   Now to create a new MERN app,
   
       mernmaker  
+
+### Default Configuration
+  Plain Javascript with Tailwind CSS, to change these you will have to edit the main.py file.
+  
   
