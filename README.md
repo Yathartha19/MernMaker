@@ -25,6 +25,10 @@ To get started with **MernMaker**,
 
       mernmaker stats
 
+  Linting,
+
+      mernmaker lint
+
 ### Default Configuration
   MongoDB with choice for Tailwind CSS or pure CSS, ExpressJS and ReactJS.
   To change these you will have to edit the main.py file.
