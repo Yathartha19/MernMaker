@@ -35,6 +35,3 @@ To get started with **MernMaker**,
 - **Dependency Management**: Automatically install and manage essential packages for your MERN applications.
 - **Custom Scripts**: Run custom scripts and commands tailored to your development workflow.
 - **User-Friendly Interface**: Simple and intuitive CLI for both beginners and experienced developers.
-
-
-  
