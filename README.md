@@ -14,10 +14,20 @@ To get started with **MernMaker**,
 
   Now to create a new MERN app,
   
-      mernmaker  
+      mernmaker create your_app_name
+
+  To edit or view github changelog,
+
+      mernmaker changelog update
+      mernmaker changelog view
+
+  To view code stats,
+
+      mernmaker stats
 
 ### Default Configuration
-  Plain Javascript with Tailwind CSS, to change these you will have to edit the main.py file.
+  MongoDB with choice for Tailwind CSS or pure CSS, ExpressJS and ReactJS.
+  To change these you will have to edit the main.py file.
 
 ### Key Features
 
@@ -26,11 +36,5 @@ To get started with **MernMaker**,
 - **Custom Scripts**: Run custom scripts and commands tailored to your development workflow.
 - **User-Friendly Interface**: Simple and intuitive CLI for both beginners and experienced developers.
 
-### Technologies Used
-
-- **Node.js**: JavaScript runtime for building scalable applications.
-- **Express.js**: Web application framework for Node.js, designed for building web applications and APIs.
-- **React**: Front-end library for building user interfaces.
-- **MongoDB**: NoSQL database for storing application data.
 
   
