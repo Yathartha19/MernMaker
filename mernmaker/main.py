@@ -1,6 +1,7 @@
 import os
 import click
 import subprocess
+from datetime import datetime
 
 TEMPLATES_DIR = os.path.join(os.path.dirname(__file__), 'templates')
 
@@ -84,10 +85,14 @@ def other_setups(app_name):
 
         os.remove(frontend_gitignore_path)
 
+@click.group()
+def main():
+    pass
+
 @click.command()
-@click.option('--app_name', prompt='Enter the name of your MERN app', help='The name of the MERN app to create')
+@click.argument('app_name')
 @click.option('--tailwind', prompt='Do you want to use Tailwind CSS?', help='Whether to use Tailwind CSS or not')
-def main(app_name, tailwind):
+def create(app_name, tailwind):
 
     server_setup(app_name)
     frontend_setup(app_name, tailwind)
@@ -101,6 +106,76 @@ def main(app_name, tailwind):
     click.echo(f"Created MERN app, {app_name}. Now run,\n")
     click.echo(f"       cd {app_name}\n")
     click.echo("Edit .env file with your MongoDB URI\n\n")
+
+@click.command()
+@click.argument('parg')
+def changelog(parg):
+    if parg == 'update':
+        """Automatically update the changelog with the latest Git commits."""
+        changelog_path = os.path.join(os.path.dirname(__file__), 'CHANGELOG.md')
+
+        if not os.path.exists(changelog_path):
+            with open(changelog_path, 'w') as changelog_file:
+                changelog_file.write("# Changelog\n\n")
+
+        try:
+            commits = subprocess.check_output(
+                ["git", "log", "--pretty=format:%h - %s (%an)", "--no-merges", "-n", "5"], 
+                text=True
+            ).strip()
+        except subprocess.CalledProcessError as e:
+            click.echo("Error fetching commits. Please ensure you're in a Git repository.")
+            return
+
+        if not commits:
+            click.echo("No new commits found.")
+            return
+
+        timestamp = datetime.now().strftime("%Y-%m-%d")
+        with open(changelog_path, 'a') as changelog_file:
+            changelog_file.write(f"## {timestamp}\n")
+            changelog_file.write(f"{commits}\n\n")
+
+        click.echo(f"Changelog updated with latest commits:\n{commits}")
+    
+    elif parg == 'view':
+        """Display the changelog."""
+        changelog_path = os.path.join(os.path.dirname(__file__), 'CHANGELOG.md')
+        
+        if os.path.exists(changelog_path):
+            with open(changelog_path, 'r') as changelog_file:
+                click.echo(click.style(changelog_file.read(), fg='green'))
+        else:
+            click.echo("Changelog file not found.")
+
+@click.command()
+@click.argument('app_name')
+def stats(app_name):
+    """Display project statistics for the specified app."""
+    
+    def count_lines_of_code(directory):
+        total_lines = 0
+        for dirpath, _, filenames in os.walk(directory):
+            for filename in filenames:
+                if filename.endswith(('.js', '.jsx', '.ts', '.tsx', '.py')):
+                    filepath = os.path.join(dirpath, filename)
+                    with open(filepath, 'r', encoding='utf-8') as f:
+                        total_lines += sum(1 for line in f)
+        return total_lines
+
+
+    backend_directory = os.path.join(app_name, 'backend')
+    frontend_directory = os.path.join(app_name, 'frontend')
+
+    loc = count_lines_of_code(backend_directory) + count_lines_of_code(frontend_directory)
+    click.echo(f'Total Lines of Code: {loc}')
+
+    click.echo('\nTest Coverage:')
+
+
+main.add_command(create)
+main.add_command(changelog)
+main.add_command(stats)
 
 if __name__ == '__main__':
     main()
