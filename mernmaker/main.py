@@ -112,7 +112,8 @@ def create(app_name, tailwind):
 def changelog(parg):
     if parg == 'update':
         """Automatically update the changelog with the latest Git commits."""
-        changelog_path = os.path.join(os.path.dirname(__file__), 'CHANGELOG.md')
+        cur_work_dir = os.getcwd()
+        changelog_path = os.path.join(cur_work_dir, 'CHANGELOG.md')
 
         if not os.path.exists(changelog_path):
             with open(changelog_path, 'w') as changelog_file:
@@ -140,7 +141,8 @@ def changelog(parg):
     
     elif parg == 'view':
         """Display the changelog."""
-        changelog_path = os.path.join(os.path.dirname(__file__), 'CHANGELOG.md')
+        cur_work_dir = os.getcwd()
+        changelog_path = os.path.join(cur_work_dir, 'CHANGELOG.md')
         
         if os.path.exists(changelog_path):
             with open(changelog_path, 'r') as changelog_file:
