@@ -6,8 +6,6 @@ setup(
     packages=find_packages(), 
     package_data={
         'mernmaker': ['templates/*'], 
-        'mernmaker': ['commands/*'],
-        'mernmaker': ['utils/*']
     },
     entry_points={
         'console_scripts': [
