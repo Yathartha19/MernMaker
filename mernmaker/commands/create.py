@@ -1,7 +1,7 @@
 import click
-from utils.server_setup import server_setup
-from utils.client_setup import client_setup
-from utils.helpers import other_setups
+from mernmaker.utils.server_setup import server_setup
+from mernmaker.utils.client_setup import client_setup
+from mernmaker.utils.helpers import other_setups
 import subprocess
 
 @click.command()

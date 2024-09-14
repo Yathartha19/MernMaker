@@ -1,6 +1,6 @@
 import os
 import subprocess
-from utils.helpers import copy_template
+from mernmaker.utils.helpers import copy_template
 
 def server_setup(app_name):
     os.makedirs(app_name)

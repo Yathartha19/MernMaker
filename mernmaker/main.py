@@ -1,7 +1,7 @@
 import click
-from commands.create import create
-from commands.changelog import changelog
-from commands.stats import stats
+from mernmaker.commands.create import create
+from mernmaker.commands.changelog import changelog
+from mernmaker.commands.stats import stats
 
 @click.group()
 def main():
