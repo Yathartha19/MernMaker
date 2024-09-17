@@ -29,18 +29,6 @@ To get started with **MernMaker**,
  
       mernmaker lint
 
-
-### Adding to PATH
-
-Make sure that the npm executable is included in your system's PATH. You can do this by following these steps:
-
-For Windows:
-    - Right-click on "This PC" or "My Computer" and select "Properties."
-    - Click on "Advanced system settings" and then click on the "Environment Variables" button.
-    - In the "System variables" section, scroll down and find the Path variable. Select it and click "Edit."
-    - Ensure that the path to your Node.js installation (e.g., C:\Program Files\nodejs\) is listed. If not, add it.
-    - Restart your terminal or command prompt.
-
 ### Default Configuration
   MongoDB with choice for Tailwind CSS or pure CSS, ExpressJS and ReactJS.
   To change these you will have to edit the main.py file.
