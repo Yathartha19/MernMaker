@@ -1,14 +1,25 @@
 import os
 import subprocess
+import sys
 
 def client_setup(app_name, tailwind):
     os.makedirs(f'{app_name}/frontend', exist_ok=True)
-    subprocess.run(["npm", "create", "vite@latest", "frontend", "--", "--template", "react"], cwd=app_name)
+    if sys.platform == 'win32':
+        subprocess.run(["npm.cmd", "create", "vite@latest", "frontend", "--", "--template", "react"], cwd=app_name, shell=True)
+    else:
+        subprocess.run(["npm", "create", "vite@latest", "frontend", "--", "--template", "react"], cwd=app_name)
 
     if tailwind.lower() == 'yes' or tailwind.lower() == 'y':
         frontend_dir = os.path.join(app_name, 'frontend')
-        subprocess.run(["npm", "install", "-D", "tailwindcss", "postcss", "autoprefixer"], cwd=frontend_dir)
-        subprocess.run(["npx", "tailwindcss", "init", "-p"], cwd=frontend_dir)
+        if sys.platform == 'win32':
+            subprocess.run(["npm.cmd", "install", "-D", "tailwindcss", "postcss", "autoprefixer"], cwd=frontend_dir, shell=True)
+        else:
+            subprocess.run(["npm", "install", "-D", "tailwindcss", "postcss", "autoprefixer"], cwd=frontend_dir)
+
+        if sys.platform == 'win32':
+            subprocess.run(["npx.cmd", "tailwindcss", "init", "-p"], cwd=frontend_dir, shell=True)
+        else:
+            subprocess.run(["npx", "tailwindcss", "init", "-p"], cwd=frontend_dir)
 
         with open(os.path.join(frontend_dir, 'src', 'index.css'), 'a') as css_file:
             css_file.write("\n@tailwind base;\n@tailwind components;\n@tailwind utilities;\n")

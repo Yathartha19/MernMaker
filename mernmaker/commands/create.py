@@ -4,6 +4,7 @@ from mernmaker.utils.client_setup import client_setup
 from mernmaker.utils.helpers import other_setups
 from mernmaker.utils.lint_setup import lint_setup
 import subprocess
+import sys
 
 @click.command()
 @click.argument('app_name')
@@ -14,9 +15,14 @@ def create(app_name, tailwind, lint):
     client_setup(app_name, tailwind)
     other_setups(app_name)
 
-    subprocess.run(["npm", "install", "express", "mongoose", "dotenv"], cwd=f'{app_name}')
-    subprocess.run(["npm", "install", "nodemon", "--save-dev"], cwd=f'{app_name}')
-    subprocess.run(["npm", "run", "setup"], cwd=f'{app_name}')
+    if sys.platform == 'win32':
+        subprocess.run(["npm.cmd", "install", "express", "mongoose", "dotenv"], cwd=f'{app_name}', shell=True)
+        subprocess.run(["npm.cmd", "install", "nodemon", "--save-dev"], cwd=f'{app_name}', shell=True)
+        subprocess.run(["npm.cmd", "run", "setup"], cwd=f'{app_name}', shell=True)
+    else:
+        subprocess.run(["npm", "install", "express", "mongoose", "dotenv"], cwd=f'{app_name}')
+        subprocess.run(["npm", "install", "nodemon", "--save-dev"], cwd=f'{app_name}')
+        subprocess.run(["npm", "run", "setup"], cwd=f'{app_name}')
 
     if lint == 'yes':
         lint_setup(app_name)

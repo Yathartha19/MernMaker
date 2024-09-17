@@ -2,6 +2,7 @@ import os
 import click
 import subprocess
 from mernmaker.utils.lint_setup import lint_setup
+import sys
 
 @click.command()
 @click.argument('app_name', default='.')
@@ -20,7 +21,10 @@ def lint(app_name):
             return
 
     try:
-        subprocess.run(["npm", "run", "lint"], cwd=app_name, check=True)
+        if sys.platform == 'win32':
+            subprocess.run(["npm.cmd", "install", "eslint", "--save-dev"], cwd=app_name, check=True, shell=True)
+        else:
+            subprocess.run(["npm", "run", "lint"], cwd=app_name, check=True)
         click.echo("Linting completed successfully.")
     except subprocess.CalledProcessError:
         click.echo("Error: Linting failed.")
