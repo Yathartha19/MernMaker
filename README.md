@@ -10,7 +10,7 @@ To get started with **MernMaker**,
       pip install click
       pip install --user . 
 
-  Add to PATH if not done.
+  Add to PATH if not done. (see below for guide)
 
   Now to create a new MERN app,
   
@@ -28,6 +28,18 @@ To get started with **MernMaker**,
   Linting,
 
       mernmaker lint
+
+
+#####dding to PATH
+
+Make sure that the npm executable is included in your system's PATH. You can do this by following these steps:
+Right-click on "This PC" or "My Computer" and select "Properties."
+Click on "Advanced system settings" and then click on the "Environment Variables" button.
+In the "System variables" section, scroll down and find the Path variable. Select it and click "Edit."
+Ensure that the path to your Node.js installation (e.g., C:\Program Files\nodejs\) is listed. If not, add it.
+Restart your terminal or command prompt:
+
+After making changes to the PATH variable, restart your command prompt to apply the changes.
 
 ### Default Configuration
   MongoDB with choice for Tailwind CSS or pure CSS, ExpressJS and ReactJS.
