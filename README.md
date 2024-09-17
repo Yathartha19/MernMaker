@@ -30,7 +30,7 @@ To get started with **MernMaker**,
       mernmaker lint
 
 
-#####dding to PATH
+####Adding to PATH
 
 Make sure that the npm executable is included in your system's PATH. You can do this by following these steps:
 Right-click on "This PC" or "My Computer" and select "Properties."
