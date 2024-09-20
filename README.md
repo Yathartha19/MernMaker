@@ -9,7 +9,7 @@ To get started with **MernMaker**,
 
       pip install --user . 
 
-  Add to PATH if not done. (see below for guide)
+  Add to PATH if not done. 
 
   Now to create a new MERN app,
   
