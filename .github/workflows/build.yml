@@ -1,0 +1,44 @@
+name: Build MernMaker Executable
+
+# Trigger the workflow on push to the main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-windows:
+    runs-on: windows-latest  # Build on a Windows environment
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Python
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      # Step 3: Install dependencies from requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # Step 4: Install PyInstaller
+      - name: Install PyInstaller
+        run: |
+          pip install pyinstaller
+
+      # Step 5: Build the executable (assuming main.py is the entry point)
+      - name: Build the executable
+        run: |
+          pyinstaller --onefile mernmaker/main.py  # Reference the main entry point
+
+      # Step 6: Upload the generated executable as an artifact using v3
+      - name: Upload executable
+        uses: actions/upload-artifact@v3
+        with:
+          name: MernMaker-exe
+          path: dist/main.exe  # Adjust this path based on the output name
